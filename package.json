@@ -1,0 +1,11 @@
+{
+  "name": "ele3000",
+  "version": "0.4.0",
+  "description": "Projet Poly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jean-Yves Breton, Alexandru Busila",
+  "license": "MIT"
+}

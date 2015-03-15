@@ -1,0 +1,7 @@
+
+# IDE files
+.idea
+
+# Package managers
+node_modules
+client/vendors
