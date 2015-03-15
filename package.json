@@ -2,10 +2,16 @@
   "name": "ele3000",
   "version": "0.4.0",
   "description": "Projet Poly",
-  "main": "index.js",
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jean-Yves Breton, Alexandru Busila",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "gulp": "^3.8.11",
+    "hapi": "^8.4.0",
+    "serialport": "^1.6.2"
+  }
 }

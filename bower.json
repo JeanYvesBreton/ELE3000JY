@@ -1,0 +1,14 @@
+{
+  "name": "ELE3000JY",
+  "version": "0.4.0",
+  "homepage": "https://github.com/JeanYvesBreton/ELE3000JY",
+  "authors": [
+    "Jean-Yves Breton",
+    "Alexandru Busila"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true
+}
