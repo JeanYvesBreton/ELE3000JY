@@ -14,13 +14,14 @@
 config = require(__dirname + "/../config.json")
 
 # Initialize serial port
-SerialPortLib = require("serialport").SerialPort
-serialPort = new SerialPortLib(config["serial-device"], {
+SerialPort = require("serialport").SerialPort
+serialPort = new SerialPort(config["serial-device"], {
   baudrate: config["baudrate"]
 }, false)
 
 
 # Open connection and listen to events
+serialPort.setEncoding "utf8"
 serialPort.open (err) =>
   # Check if it did not open
   if (err)
