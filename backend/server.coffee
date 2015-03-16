@@ -1,5 +1,6 @@
 
-Hapi = require("hapi");
+#Hapi = require("hapi");
+
 
 
 module.exports = "Hello"

@@ -4,4 +4,4 @@ var CoffeeScript = require("coffee-script");
 CoffeeScript.register();
 
 
-module.exports = require(__dirname + "/backend/server.coffee");
+module.exports = require(__dirname + "/serialcom/serialcom.coffee");

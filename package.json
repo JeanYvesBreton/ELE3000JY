@@ -1,9 +1,10 @@
 {
-  "name": "ele3000",
+  "name": "ELE3000JY",
   "version": "0.4.0",
   "description": "Projet Poly",
   "scripts": {
-    "start": "node main.js",
+    "backend": "node main-backend.js",
+    "serialcom": "node main-serialcom.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jean-Yves Breton, Alexandru Busila",

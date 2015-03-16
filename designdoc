@@ -1,0 +1,12 @@
+
+Def: "Micro" comme le microcontrolleur
+Def: "Node" comme application node.js
+Def: "SerialPort" comme interface com entre Micro et Node
+Def: "SerialPortLib" comme lib node.js pour Node
+
+
+Probleme: SerialPortLib.GetData() existe pas
+Solution 2 Node.js
+* Node A qui lit de la "DB" et est le HTTP server
+* Node B qui est interrupt et qui communique avec Node A
+
