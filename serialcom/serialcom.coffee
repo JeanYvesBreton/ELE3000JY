@@ -11,11 +11,11 @@
 
 
 # Load settings
-config = require(__dirname + "../config.json")
+config = require(__dirname + "/../config.json")
 
 # Initialize serial port
 SerialPortLib = require("serialport").SerialPort
-serialPort = SerialPortLib(config["serial-device"], {
+serialPort = new SerialPortLib(config["serial-device"], {
   baudrate: config["baudrate"]
 }, false)
 
