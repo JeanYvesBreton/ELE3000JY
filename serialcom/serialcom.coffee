@@ -21,7 +21,6 @@ serialPort = new SerialPort(config["serial-device"], {
 
 
 # Open connection and listen to events
-serialPort.setEncoding "utf8"
 serialPort.open (err) =>
   # Check if it did not open
   if (err)
@@ -35,5 +34,5 @@ serialPort.open (err) =>
   serialPort.on "data", (data) =>
     console.log "==============="
     console.log "Data received!"
-    console.log data
+    console.log data.toString("utf8")
 
