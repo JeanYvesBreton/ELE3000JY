@@ -17,6 +17,7 @@ config = require(__dirname + "/../config.json")
 SerialPort = require("serialport").SerialPort
 serialPort = new SerialPort(config["serial-device"], {
   baudrate: config["baudrate"]
+  parser: SerialPort.parsers.readline("\n")
 }, false)
 
 
