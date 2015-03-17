@@ -13,11 +13,15 @@
 # Load settings
 config = require(__dirname + "/../config.json")
 
-# Initialize serial port
-SerialPort = require("serialport").SerialPort
+# Require serialport librairy
+serialport = require("serialport")
+# Localize object constructor
+SerialPort = serialport.SerialPort
+# Instantiate a SerialPort object
+# with baudrate and parser option
 serialPort = new SerialPort(config["serial-device"], {
   baudrate: config["baudrate"]
-  parser: SerialPort.parsers.readline("\n")
+  parser: serialport.parsers.readline("\n")
 }, false)
 
 
