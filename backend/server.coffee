@@ -1,3 +1,4 @@
+console.log "Server script running"
 
 #Hapi = require("hapi");
 fork = require('child_process').fork
