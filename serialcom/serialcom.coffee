@@ -40,4 +40,6 @@ serialPort.open (err) =>
     console.log "==============="
     console.log "Data received!"
     console.log data.toString("utf8")
+    # Send serial com port message to master
+    process.send data.toString("utf8")
 
