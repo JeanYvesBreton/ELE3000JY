@@ -38,6 +38,6 @@ serialPort.open (err) =>
 
   # Hook events on data
   serialPort.on "data", (data) =>
-    console.log "serialcom - Data received, sending it to server process"
+    console.log "serialcom - Data received, sending it to server process \n"
     process.stdout.write data.toString("utf8")
 
