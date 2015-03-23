@@ -11,7 +11,7 @@ http = require("http")
 # Load settings
 config = require(__dirname + "/../config.json")
 
-postData (data_string) =>
+postData = (data_string) =>
   # options object for http PUT resquest of system_data
   # headers['Content-Length'] will be set before sending data
   # because data length is not constant
