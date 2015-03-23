@@ -9,4 +9,4 @@ serialcom = fork(__dirname + '/../serialcom/serialcom.coffee')
 serialcom.stdout.on 'data', (data) =>
   console.log "server - stdout: "
   console.log data
-  return
+  console.log "\n"
