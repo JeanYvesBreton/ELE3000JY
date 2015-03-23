@@ -31,16 +31,13 @@ serialPort = new SerialPort(config["serial-device"], {
 serialPort.open (err) =>
   # Check if it did not open
   if (err)
-    console.log "!!!!!!!!!!!!!!!!!!!!!!"
-    console.log "Error! Failed to open connection because \"#{err.message}\"."
+    console.log "serialcom - Error: Failed to open connection because \"#{err.message}\"."
     return
 
   console.log "Opened connection to serialport. \n"
 
   # Hook events on data
   serialPort.on "data", (data) =>
-    console.log "==============="
-    console.log "Data received!"
-    console.log data.toString("utf8")
+    console.log "serialcom - Data received, sending it to server process"
     process.stdout.write data.toString("utf8")
 
