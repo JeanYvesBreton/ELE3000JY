@@ -12,6 +12,7 @@
 
 # Load settings
 config = require(__dirname + "/../config.json")
+cp = require('child_process')
 
 # Require serialport librairy
 serialport = require("serialport")
