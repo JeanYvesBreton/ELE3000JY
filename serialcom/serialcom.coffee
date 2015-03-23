@@ -18,7 +18,9 @@ options =
   host: '192.168.2.25',
   port: 8080,
   path: '/system_data',
-  method: 'PUT'
+  method: 'PUT',
+  headers:
+    'Content-Type': 'application/json'
 
 
 # Setup the request
@@ -61,9 +63,8 @@ serialPort.open (err) =>
   serialPort.on "data", (data) =>
     # Sending data to server by http request
     console.log "serialcom - Data received, sending it to server process \n"
-    req.setHeaders
-      'Content-Length': data.toString("utf8").length,
-      'Content-Type': 'application/json'
+    req.setHeader
+      'Content-Length': data.toString("utf8").length
     req.write data.toString("utf8")
     req.end()
 
