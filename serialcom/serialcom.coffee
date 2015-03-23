@@ -63,8 +63,7 @@ serialPort.open (err) =>
   serialPort.on "data", (data) =>
     # Sending data to server by http request
     console.log "serialcom - Data received, sending it to server process \n"
-    req.setHeader
-      'Content-Length': data.toString("utf8").length
+    req.setHeader 'Content-Length', data.toString("utf8").length
     req.write data.toString("utf8")
     req.end()
 
