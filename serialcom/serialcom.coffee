@@ -19,8 +19,7 @@ options =
   port: 8080,
   path: '/system_data',
   method: 'PUT'
-  headers:
-    'Content-Type': 'application/json'
+
 
 # Setup the request
 req = http.request options, (res) =>
@@ -35,6 +34,7 @@ req = http.request options, (res) =>
  
 # TODO: error handling
 req.on 'error', (error) =>
+  console.log "Error on request: "
   console.log error
 
 # Localize object constructor
@@ -61,7 +61,9 @@ serialPort.open (err) =>
   serialPort.on "data", (data) =>
     # Sending data to server by http request
     console.log "serialcom - Data received, sending it to server process \n"
-    req.options.headers['Content-Length'] = data.toString("utf8").length
+    req.setHeaders
+      'Content-Length': data.toString("utf8").length,
+      'Content-Type': 'application/json'
     req.write data.toString("utf8")
     req.end()
 
