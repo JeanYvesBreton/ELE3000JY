@@ -1,4 +1,3 @@
-console.log "Server script running"
 
 #Hapi = require("hapi");
 fork = require('child_process').fork
@@ -7,5 +6,6 @@ fork = require('child_process').fork
 serialcom = fork(__dirname + '/../serialcom/serialcom.coffee')
 
 # Simply log message on reception
-serialcom.on 'message', (msg) =>
-  console.log msg
+serialcom.stdout.on 'data', (data) =>
+  console.log "stdout: "
+  console.log data
