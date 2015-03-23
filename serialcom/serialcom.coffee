@@ -11,33 +11,38 @@ http = require("http")
 # Load settings
 config = require(__dirname + "/../config.json")
 
-# options object for http PUT resquest of system_data
-# headers['Content-Length'] will be set before sending data
-# because data length is not constant
-options = 
-  host: '192.168.2.25',
-  port: 8080,
-  path: '/system_data',
-  method: 'PUT',
-  headers:
-    'Content-Type': 'application/json'
+postData (data_string) =>
+  # options object for http PUT resquest of system_data
+  # headers['Content-Length'] will be set before sending data
+  # because data length is not constant
+  options =
+    host: '192.168.2.25',
+    port: 8080,
+    path: '/system_data',
+    method: 'POST',
+    headers:
+      'Content-Type': 'application/json',
+      'Content-Length': data_string.length
 
+  # Setup the request
+  req = http.request options, (res) =>
+    res.setEncoding 'utf-8'
+    responseString = ''
 
-# Setup the request
-req = http.request options, (res) =>
-  res.setEncoding 'utf-8'
-  responseString = ''
-  
-  res.on 'data', (data) =>
-    responseString += data
-  
-  res.on 'end', () =>
-    console.log responseString
- 
-# TODO: error handling
-req.on 'error', (error) =>
-  console.log "Error on request: "
-  console.log error
+    res.on 'data', (data) =>
+      responseString += data
+
+    res.on 'end', () =>
+      console.log responseString
+
+  # TODO: error handling
+  req.on 'error', (error) =>
+    console.log "Error on request: "
+    console.log error
+
+  req.write data_string
+  req.end()
+
 
 # Localize object constructor
 SerialPort = serialport.SerialPort
@@ -63,7 +68,5 @@ serialPort.open (err) =>
   serialPort.on "data", (data) =>
     # Sending data to server by http request
     console.log "serialcom - Data received, sending it to server process \n"
-    req.setHeader 'Content-Length', data.toString("utf8").length
-    req.write data.toString("utf8")
-    req.end()
+    postData data.toString("utf8")
 
