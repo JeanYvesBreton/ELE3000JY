@@ -1,7 +1,6 @@
 
-# TODO: Change this to a command to list all peripherals
-#serialPort = require("serialport")
-
+serialport = require("serialport")
+http = require("http")
 
 #serialPort.list (err, ports) =>
 #  ports.forEach (port) =>
@@ -9,12 +8,34 @@
 #    console.log port.pnpId
 #    console.log port.manufacturer
 
-
 # Load settings
 config = require(__dirname + "/../config.json")
 
-# Require serialport librairy
-serialport = require("serialport")
+# options object for http PUT resquest of system_data
+# headers['Content-Length'] will be set before sending data
+# because data length is not constant
+options = 
+  host: '192.168.2.25',
+  port: 8080,
+  path: '/system_data',
+  method: 'PUT'
+  headers:
+    'Content-Type': 'application/json'
+
+# Setup the request
+req = http.request options, (res) =>
+  res.setEncoding 'utf-8'
+  responseString = ''
+  
+  res.on 'data', (data) =>
+    responseString += data
+  
+  res.on 'end', () =>
+    console.log responseString
+ 
+# TODO: error handling
+req.on 'error', (error) =>
+  console.log error
 
 # Localize object constructor
 SerialPort = serialport.SerialPort
@@ -38,6 +59,9 @@ serialPort.open (err) =>
 
   # Hook events on data
   serialPort.on "data", (data) =>
+    # Sending data to server by http request
     console.log "serialcom - Data received, sending it to server process \n"
-    process.stdout.write(data.toString("utf8") + "\n")
+    req.options.headers['Content-Length'] = data.toString("utf8").length
+    req.write data.toString("utf8")
+    req.end()
 
