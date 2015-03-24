@@ -10,3 +10,6 @@ server.route
   path: '/system_data'
   handler: (request, reply) =>
     console.log request.data
+    
+
+module.exports = server;
