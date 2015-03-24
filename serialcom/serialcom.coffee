@@ -16,7 +16,7 @@ postData = (data_string) =>
   # headers['Content-Length'] will be set before sending data
   # because data length is not constant
   options =
-    host: 'http://localhost',
+    host: 'localhost',
     port: 3000,
     path: '/system_data',
     method: 'POST',
