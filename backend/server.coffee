@@ -9,7 +9,7 @@ server.route
   method: 'POST'
   path: '/system_data'
   handler: (request, reply) =>
-    console.log request.payload
+    console.log request.payload.toString('utf8')
     
 
 module.exports = server;
