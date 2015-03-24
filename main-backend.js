@@ -1,7 +1,9 @@
 
 // Import coffee-script to use coffee-script files in backend
-var CoffeeScript = require("coffee-script");
-CoffeeScript.register();
+var __registerCoffeeScript = require("coffee-script/register");
 
 
-//module.exports = require(__dirname + "/backend/server.coffee");
+var server = require(__dirname + "/backend/server.coffee");
+server.start(function () {
+  console.log("--> Serving ELE3000!");
+});
