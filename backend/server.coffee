@@ -9,7 +9,13 @@ server.route
   method: 'POST'
   path: '/system_data'
   handler: (request, reply) =>
-    console.log request
+    request.on 'data', (data) =>
+      console.log data
+    request.on 'end', (data) =>
+      if data
+        console.log data
+      console.log "end of transmission"
     
 
 module.exports = server;
+
