@@ -17,7 +17,7 @@ postData = (data_string) =>
   # because data length is not constant
   options =
     host: 'localhost',
-    port: 3000,
+    port: 8080,
     path: '/system_data',
     method: 'POST',
     headers:
