@@ -9,7 +9,7 @@ server.route
   method: 'POST'
   path: '/system_data'
   handler: (request, reply) =>
-    console.log JSON.parse(request.payload)
+    console.log request
     
 
 module.exports = server;
