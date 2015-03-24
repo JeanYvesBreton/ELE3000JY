@@ -5,7 +5,7 @@ Hapi = require("hapi")
 server = new Hapi.Server()
 
 server.connection
-  host: 'localhost'
+  host: '192.168.2.25'
   port: 8080
 
 server.route [
