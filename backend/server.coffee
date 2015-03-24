@@ -12,14 +12,14 @@ server.route [
   {
     method: 'POST',
     path: '/system_data',
-    handler: (request, reply) =>
+    handler: (request, response) =>
       data = request.payload
       console.log data
   },
   {
     method: 'GET',
     path: '/',
-    handler: (request, reply) =>
+    handler: (request, response) =>
       reply 'GROW CONNECTED'
 
   }
