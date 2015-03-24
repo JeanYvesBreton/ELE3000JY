@@ -16,11 +16,5 @@ server.route
         console.log data
       console.log "end of transmission"
 
-server.route
-  method: 'GET'
-  path: '/'
-  handler: (request, reply) =>
-    reply.send "S A D B O Y S"
-
 module.exports = server;
 
