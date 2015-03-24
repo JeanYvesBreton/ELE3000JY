@@ -3,7 +3,7 @@
 Hapi = require("hapi")
 
 server = new Hapi.server()
-server.connection {port:8080}
+server.connection {port:3000}
 
 server.route
   method: 'POST'
