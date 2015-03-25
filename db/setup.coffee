@@ -16,3 +16,5 @@ db.serialize () =>
   db.run "CREATE TABLE slave (id INTEGER PRIMARY KEY, unit_name TEXT)"
   db.run "CREATE TABLE temp1 (id INTEGER PRIMARY KEY, FOREIGN KEY(slave_id) REFERENCES slave(id) NOT NULL, data TEXT, time TEXT)"
   
+
+db.close()
