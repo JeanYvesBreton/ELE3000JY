@@ -20,7 +20,7 @@ server.route [
     method: 'GET',
     path: '/',
     handler: (request, reply) =>
-      reply 'JY loves Isabelle'
+      reply 'isabelle breton pue, dit jean yves breton'
 
   }
 ]
