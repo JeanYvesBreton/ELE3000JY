@@ -20,13 +20,10 @@ server.route [
     method: 'GET',
     path: '/',
     handler: (request, reply) =>
-      reply 'isabelle breton pue, dit jean yves breton'
+      reply 'GROW CONNECTED'
 
   }
 ]
-
-server.start () =>
-  console.log('Server running at:', server.info.uri)
 
 module.exports = server;
 
