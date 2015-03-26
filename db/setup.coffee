@@ -5,7 +5,6 @@ sqlite3 = require("sqlite3").verbose()
 
 # Determine path of the file to use
 file = __dirname + "/test.db"
-console.log file
 # Check if the file does exist
 if !fs.existsSync(file)
   throw new Error "test.db file doesn't exist"
