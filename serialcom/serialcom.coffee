@@ -40,8 +40,8 @@ postData = (data_string) =>
     console.log "Error on request: "
     console.log error
 
-  req.write data_string
-  req.end()
+  req.write data_string, () =>
+    req.end()
 
 
 # Localize object constructor
