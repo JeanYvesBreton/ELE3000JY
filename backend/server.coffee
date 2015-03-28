@@ -15,7 +15,6 @@ server.route [
     handler: (request, reply) =>
       data = request.payload
       console.log data
-      #reply("Message: " + data + " was succesfully received.")
   },
   {
     method: 'GET',
