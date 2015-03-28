@@ -27,7 +27,10 @@ writeToDB = (msg) =>
     # Find the type of data
     if msg.data.hasOwnProperty('TEMP1')
       db.serialize () =>
-        db.run "INSERT INTO 'temp1' VALUES(NULL, " + msg.data.temp1 + ", " + new Date().toString() + ", " + msg.id + ")"
+        stmt = db.prepare "INSERT INTO 'temp1' VALUES (?)"
+        stmt.run "NULL, " + msg.data.temp1 + ", " + new Date().toString() + ", " + msg.id
+        stmt.finalize()
+
       db.close()
 
 server.route [
