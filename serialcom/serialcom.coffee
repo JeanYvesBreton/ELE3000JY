@@ -67,8 +67,9 @@ serialPort.open (err) =>
   # Hook events on data
   serialPort.on "data", (data) =>
     # Sending data to server by http request
-    console.log "serialcom - Following data was recieved \n"
+    console.log "---------------------------------------------"
+    console.log "serialcom - Following data was recieved:"
     console.log data.toString("utf8")
-    console.log "Sending it to server and waiting for reply...\n"
+    console.log "Sending it to server and waiting for reply..."
     postData data.toString("utf8")
 
