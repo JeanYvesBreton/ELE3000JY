@@ -23,6 +23,7 @@ server.connection
 
 writeToDB = (msg) =>
   # Check if data field is empty
+  console.log Object.keys(msg.data).length
   if not (Object.keys(msg.data).length is 0)
     # Find the type of data
     if msg.data.hasOwnProperty('TEMP1')
