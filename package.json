@@ -17,6 +17,7 @@
     "serialport": "^1.6.2"
   },
   "dependencies": {
+    "handlebars": "^3.0.1",
     "sqlite3": "^3.0.5"
   }
 }
