@@ -31,8 +31,6 @@ writeToDB = (msg) =>
         stmt.run null, msg.data.temp.toString(), new Date().toString(), msg.id
         stmt.finalize()
 
-      db.close()
-
 server.route [
   {
     method: 'POST',
