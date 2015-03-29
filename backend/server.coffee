@@ -4,6 +4,8 @@ Hapi = require("hapi")
 fs = require("fs")
 # Require sqlite3
 sqlite3 = require("sqlite3").verbose()
+# Require Handlebars
+handlebars = require("handlebars")
 
 # Determine path of the file to use
 file = __dirname + "/../db/test.db"
@@ -21,6 +23,11 @@ server.connection
   host: '192.168.2.25'
   port: 8080
 
+server.views
+  engines:
+    html: handlebars
+  path: __dirname + '/../client/templates'
+
 writeToDB = (msg) =>
   # Check if data field is empty
   if not (Object.keys(msg.data).length is 0)
@@ -30,6 +37,15 @@ writeToDB = (msg) =>
         stmt = db.prepare "INSERT INTO temp1 VALUES (?,?,?,?)"
         stmt.run null, msg.data.temp.toString(), new Date().toString(), msg.id
         stmt.finalize()
+  # Check if error field is empty
+  if not (Object.keys(msg.error).length is 0)
+    db.serialize () =>
+      stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
+      stmt.run null, msg.error.type, new Date().toString(), msg.id
+      stmt.finalize()
+
+readDBSystemStatus = () =>
+
 
 server.route [
   {
