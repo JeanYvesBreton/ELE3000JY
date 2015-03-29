@@ -23,9 +23,9 @@ server.connection
 
 writeToDB = (msg) =>
   # Check if data field is empty
-  console.log Object.keys(msg.data).length
   if not (Object.keys(msg.data).length is 0)
     # Find the type of data
+    console.log msg.data.hasOwnProperty('TEMP1')
     if msg.data.hasOwnProperty('TEMP1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO temp1 VALUES (?)"
