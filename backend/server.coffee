@@ -27,7 +27,7 @@ writeToDB = (msg) =>
     # Find the type of data
     if msg.data.hasOwnProperty('temp')
       db.serialize () =>
-        stmt = db.prepare "INSERT INTO temp1 VALUES (?)"
+        stmt = db.prepare "INSERT INTO temp1 VALUES (?,?,?,?)"
         stmt.run "NULL, " + msg.data.temp1 + ", " + new Date().toString() + ", " + msg.id
         stmt.finalize()
 
