@@ -48,7 +48,9 @@ writeToDB = (msg) =>
       stmt.finalize()
 
 readDBSystemStatus = () =>
-
+  db.serialize () =>
+    db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
+      console.log row
 
 server.route [
   {
