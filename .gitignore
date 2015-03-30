@@ -6,3 +6,6 @@
 node_modules
 npm-debug.log # NPM files for error
 client/vendors
+
+# DB file for backend
+db/test.db
