@@ -31,6 +31,9 @@ server.views
       isCached: false
   path: __dirname + '/../client/templates'
 
+# This function write to test.db the data directly
+# received from the serial port whether it is
+# an error or data specific to a sensor
 writeToDB = (msg) =>
   # Check if data field is empty
   if not (Object.keys(msg.data).length is 0)
@@ -47,6 +50,9 @@ writeToDB = (msg) =>
       stmt.run null, msg.error.type, new Date().toString(), msg.id
       stmt.finalize()
 
+# This function returns the last portrait of
+# the slaves conditions with the time at which
+# each data was received
 readDBSystemStatus = () =>
   context =
     serre1:
