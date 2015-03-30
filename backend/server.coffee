@@ -48,7 +48,12 @@ writeToDB = (msg) =>
       stmt.finalize()
 
 readDBSystemStatus = () =>
-  context = {}
+  context =
+    serre1:
+      temp1: ''
+    serre2:
+      temp1: ''
+
   db.serialize () =>
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
       context.serre1.temp1 = row.data
