@@ -25,7 +25,10 @@ server.connection
 
 server.views
   engines:
-    html: handlebars
+    html:
+      module: handlebars
+      compileMode: 'sync'
+      isCached: false
   path: __dirname + '/../client/templates'
 
 writeToDB = (msg) =>
@@ -60,7 +63,7 @@ server.route [
     method: 'GET',
     path: '/',
     handler: (request, reply) =>
-      reply 'GROW CONNECTED'
+      reply.view 'currentstatus'
 
   }
 ]
