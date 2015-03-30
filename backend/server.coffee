@@ -48,9 +48,12 @@ writeToDB = (msg) =>
       stmt.finalize()
 
 readDBSystemStatus = () =>
+  context = {}
   db.serialize () =>
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
-      console.log row
+      context.serre1.temp1 = row.data
+      context.serre1.time = row.time
+  return context
 
 server.route [
   {
@@ -65,7 +68,7 @@ server.route [
     method: 'GET',
     path: '/',
     handler: (request, reply) =>
-      reply.view 'currentstatus'
+      reply.view 'currentstatus', readDBSystemStatus()
 
   }
 ]
