@@ -15,16 +15,11 @@ if !fs.existsSync(file)
 # Create new database instance
 db = new sqlite3.Database(file)
 
-
-
 server = new Hapi.Server()
-
 
 server.connection
   #host: '192.168.2.25'
   port: 8080
-
-
 
 server.views
   engines:
@@ -33,6 +28,7 @@ server.views
       compileMode: 'sync'
       isCached: false
   path: __dirname
+
 
 server.route
   method: "GET"
@@ -79,7 +75,6 @@ readDBSystemStatus = () =>
       temp1: ''
     serre2:
       temp1: ''
-
   db.serialize () =>
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
       context.serre1.temp1 = row.data
@@ -87,22 +82,13 @@ readDBSystemStatus = () =>
   return context
 
 
-server.route [
-  {
-    method: 'POST'
-    path: '/system_data'
-    handler: (request, reply) =>
-      data = request.payload
-      writeToDB data
-      reply("Message was succesfully received.")
-  },
-  {
-    method: "GET"
-    path: "/"
-    handler: (request, reply) =>
-      #reply.view 'currentstatus', readDBSystemStatus()
-      reply.view "index"
-  }
-]
+server.route
+  method: 'POST'
+  path: '/system_data'
+  handler: (request, reply) =>
+    data = request.payload
+    writeToDB data
+    reply("Message was succesfully received.")
+
 
 module.exports = server;
