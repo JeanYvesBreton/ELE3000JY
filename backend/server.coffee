@@ -1,11 +1,10 @@
-# Require Hapi
+
+
 Hapi = require("hapi")
-# Require node.js file system
 fs = require("fs")
-# Require sqlite3
 sqlite3 = require("sqlite3").verbose()
-# Require Handlebars
 handlebars = require("handlebars")
+
 
 # Determine path of the file to use
 file = __dirname + "/../db/test.db"
@@ -16,20 +15,41 @@ if !fs.existsSync(file)
 # Create new database instance
 db = new sqlite3.Database(file)
 
-# Create new server instance
+
+
 server = new Hapi.Server()
 
+
 server.connection
-  host: '192.168.2.25'
+  #host: '192.168.2.25'
   port: 8080
+
+
 
 server.views
   engines:
     html:
-      module: handlebars
+      module: require("handlebars")
       compileMode: 'sync'
       isCached: false
-  path: __dirname + '/../client/templates'
+  path: __dirname
+
+server.route
+  method: "GET"
+  path: "/static/{param*}"
+  handler:
+    directory:
+      path: __dirname + "/../client/src"
+      listing: false
+
+server.route
+  method: "GET"
+  path: "/vendors/{param*}"
+  handler:
+    directory:
+      path: __dirname + "/../client/vendors"
+      listing: false
+
 
 # This function write to test.db the data directly
 # received from the serial port whether it is
@@ -66,23 +86,23 @@ readDBSystemStatus = () =>
       context.serre1.time = row.time
   return context
 
+
 server.route [
   {
-    method: 'POST',
-    path: '/system_data',
+    method: 'POST'
+    path: '/system_data'
     handler: (request, reply) =>
       data = request.payload
       writeToDB data
       reply("Message was succesfully received.")
   },
   {
-    method: 'GET',
-    path: '/',
+    method: "GET"
+    path: "/"
     handler: (request, reply) =>
-      reply.view 'currentstatus', readDBSystemStatus()
-
+      #reply.view 'currentstatus', readDBSystemStatus()
+      reply.view "index"
   }
 ]
 
 module.exports = server;
-
