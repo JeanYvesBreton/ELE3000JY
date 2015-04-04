@@ -9,6 +9,10 @@ define([
   ngmdApp.config([
     "$routeProvider",
     function ($routeProvider) {
+      $routeProvinder.
+        when('/home', {
+         template: homeTemplate
+        }).
       console.log("Application module is configured.");
   }]);
 
