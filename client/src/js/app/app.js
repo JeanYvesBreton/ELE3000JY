@@ -1,5 +1,8 @@
 
-define(["angular"], function (Angular) {
+define([
+  "angular",
+  "text!app/home.html"
+], function (Angular, homeTemplate) {
 
   var ngmdApp = Angular.module("app", []);
 
