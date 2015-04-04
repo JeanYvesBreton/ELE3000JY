@@ -7,7 +7,8 @@ define([
   var ngmdApp = Angular.module("app", []);
 
   ngmdApp.config([
-    function () {
+    "$routeProvider",
+    function ($routeProvider) {
       console.log("Application module is configured.");
   }]);
 
