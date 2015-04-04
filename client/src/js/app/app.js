@@ -13,6 +13,9 @@ define([
         when('/home', {
          template: homeTemplate
         }).
+        otherwise({
+         redirectTo: '/home'
+        });
       console.log("Application module is configured.");
   }]);
 
