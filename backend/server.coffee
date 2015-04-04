@@ -26,7 +26,7 @@ server.connection
 server.views
   engines:
     html:
-      module: require("handlebars")
+      module: handlebars
       compileMode: 'sync'
       isCached: false
   path: __dirname

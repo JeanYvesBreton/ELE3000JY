@@ -20,7 +20,7 @@ define([
             controller: [
               "$scope",
               function ($scope) {
-                $scope.message = "Yoopie!";
+                $scope.message = {data: 'YAY'};
             }]
           }
         }
