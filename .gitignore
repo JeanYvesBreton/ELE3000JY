@@ -9,3 +9,6 @@ client/vendors
 
 # DB file for backend
 db/test.db
+
+# Deploy for client on backend
+backend/public/static

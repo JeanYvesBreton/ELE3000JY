@@ -1,5 +1,4 @@
 
-
 Hapi = require("hapi")
 fs = require("fs")
 sqlite3 = require("sqlite3").verbose()
@@ -15,11 +14,14 @@ if !fs.existsSync(file)
 # Create new database instance
 db = new sqlite3.Database(file)
 
+
+
 server = new Hapi.Server()
 
 server.connection
   #host: '192.168.2.25'
   port: 8080
+
 
 server.views
   engines:
@@ -35,15 +37,7 @@ server.route
   path: "/static/{param*}"
   handler:
     directory:
-      path: __dirname + "/../client/src"
-      listing: false
-
-server.route
-  method: "GET"
-  path: "/vendors/{param*}"
-  handler:
-    directory:
-      path: __dirname + "/../client/vendors"
+      path: __dirname + "/public/static"
       listing: false
 
 
@@ -80,6 +74,14 @@ readDBSystemStatus = () =>
       context.serre1.temp1 = row.data
       context.serre1.time = row.time
   return context
+
+
+server.route
+  method: "GET"
+  path: "/"
+  handler: (request, reply) ->
+    reply.view("index")
+
 
 
 server.route

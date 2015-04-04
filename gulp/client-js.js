@@ -4,7 +4,36 @@ var rjs = require("requirejs");
 
 module.exports = function (gulp, plugins, paths) {
 
-  gulp.task("client-js-build", function (done) {
+  gulp.task("client-js-deploy-dep-rjs", function () {
+
+    return gulp.src(paths.clientVendors + "requirejs/require.js")
+      .pipe(gulp.dest(paths.clientDeploy + "js/"));
+
+  });
+
+
+  gulp.task("client-js-deploy-dep-rjs-watch", [
+    "client-js-deploy-dep-rjs"
+  ], function () {
+
+    gulp.watch(paths.clientVendors, ["client-js-deploy-dep-rjs"]);
+
+  });
+
+
+  gulp.task("client-js-deploy-dep", [
+    "client-js-deploy-dep-rjs"
+  ]);
+
+
+  gulp.task("client-js-deploy-dep-watch", [
+    "client-js-deploy-dep-rjs-watch"
+  ]);
+
+
+
+
+  gulp.task("client-js-deploy-bundle", function (done) {
 
     rjs.optimize({
       baseUrl: paths.clientSrc + "js/",
@@ -15,19 +44,36 @@ module.exports = function (gulp, plugins, paths) {
 
         // Libraries
         "lodash": paths.clientVendors + "lodash/lodash",
-        "angular": paths.clientVendors = "angular/angular"
+        "angular": paths.clientVendors + "angular/angular"
+      },
+      shim: {
+        "angular": {
+          exports: "angular"
+        }
       },
       stubModules: [
         "text"
       ],
       optimize: "none",
-      out: paths.clientBackendDeploy + "js/bundle.js"
-    }, function () {
+      out: paths.clientDeploy + "js/bundle.js"
+    }, function (buildResponse) {
+      plugins.util.log(buildResponse);
       done();
     }, function (err) {
       plugins.util.log(err);
       done();
-    })
+    });
+
+  });
+
+
+  gulp.task("client-js-deploy-bundle-watch", [
+    "client-js-deploy-bundle"
+  ], function () {
+
+    gulp.watch(paths.clientVendors, ["client-js-deploy-bundle"]);
+
+    gulp.watch(paths.clientSrc + "js/**/*", ["client-js-deploy-bundle"]);
 
   });
 
