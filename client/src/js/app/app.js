@@ -1,22 +1,31 @@
 
 define([
   "angular",
+  "ui-router",
   "text!app/home.html"
-], function (Angular, homeTemplate) {
+], function (Angular, uiRouter, homeTemplate) {
 
-  var ngmdApp = Angular.module("app", []);
+  var ngmdApp = Angular.module("app", ["ui.router"]);
+
 
   ngmdApp.config([
-    "$routeProvider",
-    function ($routeProvider) {
-      $routeProvinder.
-        when('/home', {
-         template: homeTemplate
-        }).
-        otherwise({
-         redirectTo: '/home'
-        });
-      console.log("Application module is configured.");
+    "$stateProvider",
+    function ($stateProvider) {
+
+      $stateProvider.state("root", {
+        url: "",
+        views: {
+          "content-view": {
+            template: homeTemplate,
+            controller: [
+              "$scope",
+              function ($scope) {
+                $scope.message = "Yoopie!";
+            }]
+          }
+        }
+      });
+
   }]);
 
 
