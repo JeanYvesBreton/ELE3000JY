@@ -28,12 +28,29 @@ module.exports = function (gulp, plugins, paths) {
   ]);
 
 
+  gulp.task("client-deploy-tasks-watch", [
+    "client-css-deploy-dep-watch",
+    "client-css-deploy-bundle-watch",
+    "client-js-deploy-dep-watch",
+    "client-js-deploy-bundle-watch"
+  ]);
+
+
   gulp.task("client-deploy", [
     "client-clean",
     "client-install"
   ], function () {
 
     gulp.start("client-deploy-tasks");
+
+  });
+
+
+  gulp.task("client-deploy-watch", [
+    "client-clean"
+  ], function () {
+
+    gulp.start("client-deploy-tasks-watch");
 
   });
 

@@ -24,8 +24,7 @@ loadGulpFile(__dirname + "/gulp/client.js");
 
 // Task for dev
 gulp.task("default", [
-  "client-css-deploy-bundle-watch",
-  "client-js-deploy-bundle-watch"
+  "client-deploy-watch"
 ], function (done) {
 
   var exec = require("child_process").exec,

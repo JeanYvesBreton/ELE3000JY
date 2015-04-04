@@ -6,7 +6,7 @@ module.exports = function (gulp, plugins, paths) {
     return gulp.src([
       paths.clientVendors + "bootstrap/dist/css/bootstrap.css.map"
     ])
-      .pipe(gulp.dest(ptahs.clientDeploy + "css/"));
+      .pipe(gulp.dest(paths.clientDeploy + "css/"));
 
   });
 
@@ -20,7 +20,7 @@ module.exports = function (gulp, plugins, paths) {
     "client-css-deploy-dep"
   ], function () {
 
-    gulp.watch(paths.clientVendors, [client-css-deploy-dep]);
+    gulp.watch(paths.clientVendors, ["client-css-deploy-dep"]);
 
   });
 
