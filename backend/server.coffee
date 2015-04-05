@@ -84,12 +84,16 @@ readDBSystemStatus = (callback) =>
         time: ''
 
   # Fill the structure with db data
-  db.serialize () =>
+  db.serialize (callback) =>
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
+      # Check for error
+      if error
+        throw new Error "Error when getting data from temp1 for slave 1"
+
       currentstatus.slave1.data.temp1.value = row.data
       currentstatus.slave1.data.temp1.time = row.time
 
-  return callback(currentstatus)
+      callback(currentstatus)
 
 
 server.route
