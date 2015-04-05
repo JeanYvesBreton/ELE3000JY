@@ -20,7 +20,16 @@ define([
             controller: [
               "$scope",
               function ($scope) {
-                $scope.message = {data: 'YAY'};
+                $http.get('/current_status').
+                    success(function(data, status, headers, config) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        $scope.message = {data: 'YAY'};
+                    }).
+                    error(function(data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
             }]
           }
         }
