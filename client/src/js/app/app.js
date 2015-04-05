@@ -19,6 +19,7 @@ define([
             template: homeTemplate,
             controller: [
               "$scope",
+              "$http",
               function ($scope, $http) {
                 $http.get('/current_status').
                     success(function(data, status, headers, config) {
