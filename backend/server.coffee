@@ -63,7 +63,7 @@ writeToDB = (msg) =>
 # This function returns the last portrait of
 # the slaves conditions with the time at which
 # each data was received
-readDBSystemStatusV2 = (callback) =>
+readDBSystemStatus = (callback) =>
   # Define json structure
   currentstatus =
     slave1:
@@ -97,22 +97,26 @@ readDBSystemStatusV2 = (callback) =>
       if row.slave_id is 2
         currentstatus.slave2.data.temp1.value = row.data
         currentstatus.slave2.data.temp1.time = row.time
+    ,
+    # This is the completion callback of the first db.each call
+    () =>
+      db.each "SELECT * FROM error WHERE id = (SELECT MAX(id) from error where slave_id = 1) UNION SELECT * FROM error WHERE id = (SELECT MAX(id) from error where slave_id = 2)",
+      (error, row) =>
+        # Check for error
+        if error
+          throw new Error error
 
-    , db.each "SELECT * FROM error WHERE id = (SELECT MAX(id) from error where slave_id = 1) UNION SELECT * FROM error WHERE id = (SELECT MAX(id) from error where slave_id = 2)",
-    (error, row) =>
-      # Check for error
-      if error
-        throw new Error error
-
-      if row.slave_id is 1
-        currentstatus.slave1.last_error.value = row.type
-        currentstatus.slave1.last_error.time = row.time
-      if row.slave_id is 2
-        currentstatus.slave2.last_error.value = row.type
-        currentstatus.slave2.last_error.time = row.time
-
-    , () =>
-      callback currentstatus
+        if row.slave_id is 1
+          currentstatus.slave1.last_error.value = row.type
+          currentstatus.slave1.last_error.time = row.time
+        if row.slave_id is 2
+          currentstatus.slave2.last_error.value = row.type
+          currentstatus.slave2.last_error.time = row.time
+      ,
+      # This is the completion callback of the second db.each call
+      # It returns the callback passed to readDBSystemStatus
+      () =>
+        callback currentstatus
 
 
 
@@ -128,7 +132,7 @@ server.route
   method: 'GET'
   path: "/current_status"
   handler: (request, reply) =>
-    readDBSystemStatusV2 (currentstatus) =>
+    readDBSystemStatus (currentstatus) =>
       reply currentstatus
 
 server.route
