@@ -97,6 +97,8 @@ server.route
   handler: (request, reply) ->
     reply.view("index")
 
+# URL used to get last updated error and data
+# for all slave units
 server.route
   method: 'GET'
   path: "/current_status"
