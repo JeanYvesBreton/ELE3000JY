@@ -10,7 +10,7 @@ define([
 
   ngmdApp.config([
     "$stateProvider",
-    function ($stateProvider, $http) {
+    function ($stateProvider) {
 
       $stateProvider.state("root", {
         url: "",
@@ -19,7 +19,7 @@ define([
             template: homeTemplate,
             controller: [
               "$scope",
-              function ($scope) {
+              function ($scope, $http) {
                 $http.get('/current_status').
                     success(function(data, status, headers, config) {
                         // this callback will be called asynchronously
