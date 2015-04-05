@@ -10,7 +10,7 @@ define([
 
   ngmdApp.config([
     "$stateProvider",
-    function ($stateProvider) {
+    function ($stateProvider, $http) {
 
       $stateProvider.state("root", {
         url: "",
@@ -24,7 +24,7 @@ define([
                     success(function(data, status, headers, config) {
                         // this callback will be called asynchronously
                         // when the response is available
-                        $scope.message = {data: 'YAY'};
+                        $scope.message = data;
                     }).
                     error(function(data, status, headers, config) {
                         // called asynchronously if an error occurs
