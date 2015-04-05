@@ -97,7 +97,12 @@ server.route
   handler: (request, reply) ->
     reply.view("index")
 
-
+server.route
+  method: 'GET'
+  path: "/current_status"
+  handler: (request, reply) =>
+    readDBSystemStatus (currentstatus) =>
+      reply currentstatus
 
 server.route
   method: 'POST'
