@@ -2,25 +2,40 @@
 <div style="background-color: #222222">
     <p style="color: #ffffff; text-align: center; padding: 30px; font-size: 200%;"> Grow Connected </p>
 </div>
+<!-- Content of the page -->
+<div style="width: 1200px; margin: auto;">
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Slave unit</th>
-            <th>Temperature sensor 1</th>
-            <th>Last error</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="(key, value) in message">
-            <th> {{key}} </th>
-            <td> {{value.data.temp1.value}} </td>
-            <td>
-                <p ng-if="!value.last_error.value">No error recorded</p>
-                <p ng-if="value.last_error.value">{{value.last_error.value}}</p>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <h3> Lastest status </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Slave unit</th>
+                <th>Temperature sensor 1</th>
+                <th>Last error</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, value) in message">
+                <th> {{key}} </th>
+                <td>
+                    <p>
+                        {{value.data.temp1.value}} &deg;C
+                    </p>
+                    <p style="color: #777777">
+                        {{value.data.temp1.time}}
+                    </p>
+                </td>
+                <td>
+                    <p ng-if="!value.last_error.value">No error recorded</p>
+                    <p ng-if="value.last_error.value">
+                        {{value.last_error.value}}
+                    </p>
+                    <p ng-if="value.last_error.value" style="color: #777777">
+                        {{value.last_error.time}}
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-<div>{{message}}</div>
+</div>

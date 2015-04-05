@@ -60,6 +60,7 @@ writeToDB = (msg) =>
       stmt.run null, msg.error.type, new Date().toString(), msg.id
       stmt.finalize()
 
+
 # This function returns the last portrait of
 # the slaves conditions with the time at which
 # each data was received

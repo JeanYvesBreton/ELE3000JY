@@ -17,6 +17,7 @@
     "requirejs": "~2.1.16",
     "requirejs-text": "~2.0.14",
     "bootstrap": "~3.3.4",
-    "ui-router": "~0.2.13"
+    "ui-router": "~0.2.13",
+    "n3-line-chart": "~1.1.6"
   }
 }
