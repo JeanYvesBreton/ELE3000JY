@@ -101,7 +101,50 @@ readDBSystemStatus = (callback) =>
       currentstatus.slave1.data.temp1.value = row.data
       currentstatus.slave1.data.temp1.time = row.time
 
+    db.each "SELECT MAX(id) AS id, type, time, slave_id FROM error WHERE slave_id = 2", (error, row) =>
+      # Check for error
+      if error
+        throw new Error "Error when getting data from temp1 for slave 1"
+
+      currentstatus.slave2.last_error.value = row.type
+      currentstatus.slave2.last_error.time = row.time
+
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 2", (error, row) =>
+      # Check for error
+      if error
+        throw new Error "Error when getting data from temp1 for slave 1"
+
+      currentstatus.slave2.data.temp1.value = row.data
+      currentstatus.slave2.data.temp1.time = row.time
+
+      callback(currentstatus)
+
+# This function returns the last portrait of
+# the slaves conditions with the time at which
+# each data was received
+readDBSystemStatusV2 = (callback) =>
+  # Define json structure
+  currentstatus =
+    slave1:
+      data:
+        temp1:
+          value: ''
+          time: ''
+      last_error:
+        value: ''
+        time: ''
+    slave2:
+      data:
+        temp1:
+          value: ''
+          time: ''
+      last_error:
+        value: ''
+        time: ''
+
+  # Fill the structure with db data
+  db.serialize () =>
+    db.each "SELECT * FROM temp1 WHERE slave_id = 1 ORDER BY id DESC LIMIT 1 UNION SELECT * FROM temp1 WHERE slave_id = 2 ORDER BY id DESC LIMIT 1", (error, row) =>
       # Check for error
       if error
         throw new Error "Error when getting data from temp1 for slave 1"
@@ -124,7 +167,7 @@ server.route
   method: 'GET'
   path: "/current_status"
   handler: (request, reply) =>
-    readDBSystemStatus (currentstatus) =>
+    readDBSystemStatusV2 (currentstatus) =>
       reply currentstatus
 
 server.route
