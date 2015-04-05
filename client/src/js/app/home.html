@@ -1,6 +1,22 @@
 <!-- Header -->
-<div style="height: 100px; background-color: #222222"></div>
-
-<div>
-  {{ message }}
+<div style="background-color: #222222">
+    <p style="color: #ffffff; text-align: center; padding: 30px; font-size: 200%;"> Grow Connected </p>
 </div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Slave unit</th>
+            <th>Temperature sensor 1</th>
+            <th>Last error</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(key, value) in message">
+            <th> {{key}} </th>
+            <td> {{value.data.temp1.value}} </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>{{message}}</div>
