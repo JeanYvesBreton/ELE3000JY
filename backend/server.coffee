@@ -63,17 +63,32 @@ writeToDB = (msg) =>
 # This function returns the last portrait of
 # the slaves conditions with the time at which
 # each data was received
-readDBSystemStatus = () =>
-  context =
-    serre1:
-      temp1: ''
-    serre2:
-      temp1: ''
-  db.serialize () =>
+readDBSystemStatus = (callback) =>
+  # Define json structure
+  currentstatus =
+    slave1:
+      data:
+        temp1:
+          value: ''
+          time: ''
+      last_error:
+        value: ''
+        time: ''
+    slave2:
+      data:
+        temp1:
+          value: ''
+          time: ''
+      last_error:
+        value: ''
+        time: ''
+
+  # Fill the structure with db data
+  db.serialize (callback) =>
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
-      context.serre1.temp1 = row.data
-      context.serre1.time = row.time
-  return context
+      currentstatus.slave1.data.temp1.value = row.data
+      currentstatus.slave1.data.temp1.time = row.time
+    return callback(currentstatus)
 
 
 server.route
