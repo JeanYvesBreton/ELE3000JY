@@ -84,7 +84,15 @@ readDBSystemStatus = (callback) =>
         time: ''
 
   # Fill the structure with db data
-  db.serialize (callback) =>
+  db.serialize () =>
+    db.each "SELECT MAX(id) AS id, type, time, slave_id FROM error WHERE slave_id = 1", (error, row) =>
+      # Check for error
+      if error
+        throw new Error "Error when getting data from temp1 for slave 1"
+
+      currentstatus.slave1.last_error.value = row.type
+      currentstatus.slave1.last_error.time = row.time
+
     db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 1", (error, row) =>
       # Check for error
       if error
@@ -92,6 +100,14 @@ readDBSystemStatus = (callback) =>
 
       currentstatus.slave1.data.temp1.value = row.data
       currentstatus.slave1.data.temp1.time = row.time
+
+    db.each "SELECT MAX(id) AS id, data, time, slave_id FROM temp1 WHERE slave_id = 2", (error, row) =>
+      # Check for error
+      if error
+        throw new Error "Error when getting data from temp1 for slave 1"
+
+      currentstatus.slave2.data.temp1.value = row.data
+      currentstatus.slave2.data.temp1.time = row.time
 
       callback(currentstatus)
 
