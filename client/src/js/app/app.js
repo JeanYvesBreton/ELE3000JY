@@ -2,10 +2,14 @@
 define([
   "angular",
   "ui-router",
+  "n3-line-chart",
   "text!app/home.html"
-], function (Angular, uiRouter, homeTemplate) {
+], function (Angular, uiRouter, n3LineChart, homeTemplate) {
 
-  var ngmdApp = Angular.module("app", ["ui.router", "n3-line-chart"]);
+  var ngmdApp = Angular.module("app", [
+    "ui.router",
+    "n3-line-chart"
+  ]);
 
 
   ngmdApp.config([
