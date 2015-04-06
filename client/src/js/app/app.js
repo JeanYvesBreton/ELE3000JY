@@ -9,8 +9,7 @@ define([
 
   var ngmdApp = Angular.module("app", [
     "ui.router",
-    "n3-line-chart",
-    "d3"
+    "n3-line-chart"
   ]);
 
 
