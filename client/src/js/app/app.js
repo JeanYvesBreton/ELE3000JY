@@ -46,6 +46,7 @@ define([
                     // TODO: Separate concern in servide to isolate transformation logic
                     for (var i = 0, _len = data.slave1.data.length; i < _len; ++i) {
                       data.slave1.data[i].x = new Date(data.slave1.data[i].x);
+                      data.slave1.data[i].value = parseInt(data.slave1.data[i].value);
                     }
                     $scope.data = data.slave1.data;
                   })
