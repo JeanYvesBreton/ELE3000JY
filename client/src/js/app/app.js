@@ -59,7 +59,8 @@ define([
                         {y: 'value', color: 'steelblue', thickness: '2px', type: 'area', striped: true, label: 'Pouet'}
                     ],
                     tooltip: {
-                        mode: 'scrubber'
+                        mode: 'scrubber',
+                        interpolate: true
                     },
                     drawDots: true,
                     columnsHGap: 5
