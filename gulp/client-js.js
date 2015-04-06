@@ -46,6 +46,7 @@ module.exports = function (gulp, plugins, paths) {
         "lodash": paths.clientVendors + "lodash/lodash",
         "angular": paths.clientVendors + "angular/angular",
         "ui-router": paths.clientVendors + "ui-router/release/angular-ui-router",
+        "d3": paths.clientVendors + "d3/d3",
         "n3-line-chart": paths.clientVendors + "n3-line-chart/build/line-chart"
       },
       shim: {

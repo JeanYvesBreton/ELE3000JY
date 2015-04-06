@@ -121,6 +121,28 @@ readDBSystemStatus = (callback) =>
 
 
 
+readDBTemp1Data = (callback) =>
+  # Define JSON structure
+  temp1data =
+    slave1:
+      data: []
+    slave2:
+      data: []
+  # Fill the structure
+  db.serialize () =>
+    db.each "SELECT * FROM temp1 WHERE slave_id = 1 ORDER BY id ASC LIMIT 10",
+    (error, row) =>
+      if error
+        throw new Error error
+
+      temp1data.slave1.data.push
+        x: row.time
+        value: row.value
+    ,
+    () =>
+      callback temp1data
+
+
 server.route
   method: "GET"
   path: "/"
@@ -135,6 +157,13 @@ server.route
   handler: (request, reply) =>
     readDBSystemStatus (currentstatus) =>
       reply currentstatus
+
+server.route
+  method: 'GET'
+  path: "/temp1_graph_data"
+  handler: (request, reply) =>
+    readDBTemp1Data (temp1data) =>
+      reply temp1data
 
 server.route
   method: 'POST'
