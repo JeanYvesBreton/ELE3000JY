@@ -136,7 +136,7 @@ readDBTemp1Data = (callback) =>
         throw new Error error
 
       temp1data.slave1.data.push
-        x: row.time,
+        x: new Date(row.time),
         value: row.data
     ,
     () =>

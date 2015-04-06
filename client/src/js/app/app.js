@@ -56,14 +56,11 @@ define([
                         y: {type: 'linear'}
                     },
                     series: [
-                        {y: 'value', color: 'steelblue', thickness: '2px', type: 'area', striped: true, label: 'Pouet'}
+                        {y: 'value', color: 'steelblue', label: 'Temp1 slave1', lineMode: 'dashed'}
                     ],
                     tooltip: {
-                        mode: 'scrubber',
-                        interpolate: true
-                    },
-                    drawDots: true,
-                    columnsHGap: 5
+                        mode: 'scrubber'
+                    }
                 }
             }]
           }
