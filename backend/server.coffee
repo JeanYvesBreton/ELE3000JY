@@ -136,15 +136,12 @@ readDBTemp1Data = (callback) =>
       if error
         throw new Error error
 
-      temp1data.slave1.data.push
+      # unshift add an object to the beginning of the array
+      temp1data.slave1.data.unshift
         x: row.time,
         value: row.data
     ,
     () =>
-      # We need to reverse data lists so
-      # it is directly n3 line charts compatible
-      temp1data.slave1.data.reverse()
-      temp1data.slave2.data.reverse()
       callback temp1data
 
 
