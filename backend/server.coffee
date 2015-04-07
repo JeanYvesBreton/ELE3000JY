@@ -130,6 +130,7 @@ readDBTemp1Data = (callback) =>
       data: []
   # Fill the structure
   db.serialize () =>
+    # This will return the 10 most recent temp1 data in desc order
     db.each "SELECT * FROM temp1 WHERE slave_id = 1 ORDER BY id DESC LIMIT 10",
     (error, row) =>
       if error
@@ -140,6 +141,8 @@ readDBTemp1Data = (callback) =>
         value: row.data
     ,
     () =>
+      # We need to reverse data lists so
+      # it is directly n3 line charts compatible
       temp1data.slave1.data.reverse()
       temp1data.slave2.data.reverse()
       callback temp1data
