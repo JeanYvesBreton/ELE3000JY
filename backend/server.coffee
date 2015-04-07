@@ -54,7 +54,7 @@ writeToDB = (msg) =>
         stmt.run null, msg.data.temp.toString(), new Date().toString(), msg.id
         stmt.finalize()
   # Check if error field is empty
-  if not (Object.keys(msg.error).length is 0)
+  if not (Object.keys(msg.Error).length is 0)
     db.serialize () =>
       stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
       stmt.run null, msg.error.type, new Date().toString(), msg.id
