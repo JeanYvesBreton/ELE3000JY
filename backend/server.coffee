@@ -130,7 +130,7 @@ readDBTemp1Data = (callback) =>
       data: []
   # Fill the structure
   db.serialize () =>
-    db.each "SELECT * FROM temp1 WHERE slave_id = 1 ORDER BY id ASC LIMIT 10",
+    db.each "SELECT * FROM temp1 WHERE slave_id = 1 ORDER BY id DESC LIMIT 10",
     (error, row) =>
       if error
         throw new Error error
