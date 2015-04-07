@@ -140,6 +140,8 @@ readDBTemp1Data = (callback) =>
         value: row.data
     ,
     () =>
+      temp1data.slave1.data.reverse()
+      temp1data.slave2.data.reverse()
       callback temp1data
 
 
