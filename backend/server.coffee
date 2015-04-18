@@ -48,17 +48,19 @@ writeToDB = (msg) =>
   # Check if data field is empty
   if not (Object.keys(msg.data).length is 0)
     # Find the type of data
-    if msg.data.hasOwnProperty('temp')
+    if msg.data.hasOwnProperty('temp1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO temp1 VALUES (?,?,?,?)"
         stmt.run null, msg.data.temp.toString(), new Date().toString(), msg.id
         stmt.finalize()
   # Check if error field is empty
-  if not (Object.keys(msg.Error).length is 0)
-    db.serialize () =>
-      stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
-      stmt.run null, msg.error.type, new Date().toString(), msg.id
-      stmt.finalize()
+  if not (Object.keys(msg.error).length is 0)
+    # Find the cause of error
+    if msg.data.hasOwnProperty('temp1')
+      db.serialize () =>
+        stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
+        stmt.run null, "temp1" + msg.error.type, new Date().toString(), msg.id
+        stmt.finalize()
 
 
 # This function returns the last portrait of
@@ -142,7 +144,20 @@ readDBTemp1Data = (callback) =>
         value: row.data
     ,
     () =>
+      db.each "SELECT * FROM temp1 WHERE slave_id = 2 ORDER BY id DESC LIMIT 10",
+      (error, row) =>
+      if error
+        throw new Error error
+
+      # unshift add an object to the beginning of the array
+      temp1data.slave2.data.unshift
+        x: row.time,
+        value: row.data
+
+    ,
+    () =>
       callback temp1data
+
 
 
 server.route
