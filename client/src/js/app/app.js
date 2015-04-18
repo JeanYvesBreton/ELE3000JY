@@ -48,7 +48,12 @@ define([
                       data.slave1.data[i].x = new Date(data.slave1.data[i].x);
                       data.slave1.data[i].value = parseInt(data.slave1.data[i].value);
                     }
-                    $scope.data = data.slave1.data;
+                    for (var i = 0, _len = data.slave2.data.length; i < _len; ++i) {
+                        data.slave2.data[i].x = new Date(data.slave2.data[i].x);
+                        data.slave2.data[i].value = parseInt(data.slave2.data[i].value);
+                    }
+                    $scope.data1 = data.slave1.data;
+                    $scope.data2 = data.slave2.data;
                   })
                   .error(function(data, status, headers, config) {
                     // called asynchronously if an error occurs
@@ -56,7 +61,7 @@ define([
                     console.log('Error - GET on current_status, status: '+status);
                   });
 
-                $scope.options = {
+                $scope.temp1slave1 = {
                   axes: {
                     x: {
                       type: "date",
@@ -78,6 +83,30 @@ define([
                     mode: "scrubber"
                   }
                 };
+
+                $scope.temp1slave2 = {
+                  axes: {
+                    x: {
+                      type: "date",
+                      key: "x"
+                    },
+                    y: {
+                      type: "linear"
+                    }
+                  },
+                  series: [
+                    {
+                      y: "value",
+                      color: "#bcbd22",
+                      label: "Temp slave2",
+                      lineMode: "dashed"
+                    }
+                  ],
+                  tooltip: {
+                    mode: "scrubber"
+                  }
+                };
+
             }]
           }
         }
