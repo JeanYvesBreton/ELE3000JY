@@ -2,11 +2,11 @@
 serialport = require("serialport")
 http = require("http")
 
-#serialPort.list (err, ports) =>
-#  ports.forEach (port) =>
-#    console.log port.comName
-#    console.log port.pnpId
-#    console.log port.manufacturer
+serialPort.list (err, ports) =>
+  ports.forEach (port) =>
+    console.log port.comName
+    console.log port.pnpId
+    console.log port.manufacturer
 
 # Load settings
 config = require(__dirname + "/../config.json")
