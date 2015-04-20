@@ -56,7 +56,7 @@ writeToDB = (msg) =>
   # Check if error field is empty
   if not (Object.keys(msg.error).length is 0)
     # Find the cause of error
-    if msg.data.hasOwnProperty('temp1')
+    if msg.error.hasOwnProperty('temp1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
         #if msg.error.type is ""
