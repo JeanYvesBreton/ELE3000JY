@@ -2,7 +2,7 @@
 serialport = require("serialport")
 http = require("http")
 
-serialPort.list (err, ports) =>
+serialport.list (err, ports) =>
   ports.forEach (port) =>
     console.log port.comName
     console.log port.pnpId
