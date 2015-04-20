@@ -59,10 +59,10 @@ writeToDB = (msg) =>
     if msg.error.hasOwnProperty('temp1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
-        #if msg.error.type is ""
-        #  stmt.run null, "temp1: Unknow error ", new Date().toString(), msg.id
-        #else
-        stmt.run null, msg.error.temp1, new Date().toString(), msg.id
+        if msg.error.type is ""
+          stmt.run null, "Temperature sensor 1: unknow error ", new Date().toString(), msg.id
+        else if msg.error.type is "dsc"
+          stmt.run null, "Temperature sensor 1: disconnected", new Date().toString(), msg.id
         stmt.finalize()
 
 
