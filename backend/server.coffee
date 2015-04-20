@@ -59,11 +59,11 @@ writeToDB = (msg) =>
     if msg.data.hasOwnProperty('temp1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
-        if msg.error.type is ""
-          stmt.run null, "temp1: Unknow error ", new Date().toString(), msg.id
-        else
-          stmt.run null, "temp1: " + msg.error.type, new Date().toString(), msg.id
-        stmt.finalize()
+        #if msg.error.type is ""
+        #  stmt.run null, "temp1: Unknow error ", new Date().toString(), msg.id
+        #else
+        stmt.run null, "temp1: " + msg.error.type, new Date().toString(), msg.id
+        #stmt.finalize()
 
 
 # This function returns the last portrait of
