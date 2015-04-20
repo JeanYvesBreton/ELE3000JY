@@ -64,6 +64,12 @@ writeToDB = (msg) =>
         else if msg.error.temp1 is "dsc"
           stmt.run null, "Temperature sensor 1: disconnected", new Date().toString(), msg.id
         stmt.finalize()
+    else if msg.error.hasOwnProperty('maste')
+      db.serialize () =>
+        stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
+        if msg.error.maste is "dsc"
+          stmt.run null, "Master unit: disconnected from can bus", new Date().toString(), msg.id
+        stmt.finalize()
 
 
 # This function returns the last portrait of
