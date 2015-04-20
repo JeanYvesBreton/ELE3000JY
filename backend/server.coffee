@@ -63,7 +63,7 @@ writeToDB = (msg) =>
         #  stmt.run null, "temp1: Unknow error ", new Date().toString(), msg.id
         #else
         stmt.run null, msg.error.temp1, new Date().toString(), msg.id
-        #stmt.finalize()
+        stmt.finalize()
 
 
 # This function returns the last portrait of
