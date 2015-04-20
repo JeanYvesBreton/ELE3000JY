@@ -19,7 +19,7 @@ db = new sqlite3.Database(file)
 server = new Hapi.Server()
 
 server.connection
-  host: '192.168.2.26'
+  host: '132.207.201.54'
   port: 8080
 
 
