@@ -51,7 +51,7 @@ writeToDB = (msg) =>
     if msg.data.hasOwnProperty('temp1')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO temp1 VALUES (?,?,?,?)"
-        stmt.run null, msg.data.temp.toString(), new Date().toString(), msg.id
+        stmt.run null, msg.data.temp1.toString(), new Date().toString(), msg.id
         stmt.finalize()
   # Check if error field is empty
   if not (Object.keys(msg.error).length is 0)
