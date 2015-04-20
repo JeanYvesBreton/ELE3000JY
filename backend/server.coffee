@@ -64,11 +64,11 @@ writeToDB = (msg) =>
         else if msg.error.temp1 is "dsc"
           stmt.run null, "Temperature sensor 1: disconnected", new Date().toString(), msg.id
         stmt.finalize()
-    else if msg.error.hasOwnProperty('maste')
+    else if msg.error.hasOwnProperty('CANBu')
       db.serialize () =>
         stmt = db.prepare "INSERT INTO error VALUES (?,?,?,?)"
-        if msg.error.maste is "dsc"
-          stmt.run null, "Master unit: disconnected from can bus", new Date().toString(), msg.id
+        if msg.error.CANBu is "dsc"
+          stmt.run null, "Unit disconnected from CAN bus", new Date().toString(), msg.id
         stmt.finalize()
 
 
