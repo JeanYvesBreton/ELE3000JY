@@ -149,17 +149,17 @@ readDBTemp1Data = (callback) =>
     () =>
       db.each "SELECT * FROM temp1 WHERE slave_id = 2 ORDER BY id DESC LIMIT 10",
       (error, row) =>
-      if error
-        throw new Error error
+        if error
+          throw new Error error
 
-      # unshift add an object to the beginning of the array
-      temp1data.slave2.data.unshift
-        x: row.time,
-        value: row.data
+        # unshift add an object to the beginning of the array
+        temp1data.slave2.data.unshift
+          x: row.time,
+          value: row.data
 
-    ,
-    () =>
-      callback temp1data
+      ,
+      () =>
+        callback temp1data
 
 
 
