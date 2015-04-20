@@ -62,7 +62,7 @@ writeToDB = (msg) =>
         #if msg.error.type is ""
         #  stmt.run null, "temp1: Unknow error ", new Date().toString(), msg.id
         #else
-        stmt.run null, "temp1: " + msg.error.type, new Date().toString(), msg.id
+        stmt.run null, "temp1: " + msg.error.type.toString(), new Date().toString(), msg.id
         #stmt.finalize()
 
 
